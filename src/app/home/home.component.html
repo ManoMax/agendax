@@ -1,0 +1,61 @@
+<app-header></app-header>
+  
+<div class="home">
+  <div class="counters">
+    <p>Próximos eventos: {{ upcomingEventsCount }}</p>
+    <p>Eventos Passados não Finalizados: {{ pastUnfinishedEventsCount }}</p>
+    <p>Eventos Passados Finalizados: {{ pastFinishedEventsCount }}</p>
+  </div>
+  
+  <mat-card>
+    <mat-card-title>Registrar Evento</mat-card-title>
+    <mat-card-content>
+      <div class="date-text-container">
+        <mat-form-field appearance="fill" class="title">
+          <mat-label>Título</mat-label>
+          <input matInput id="title" [(ngModel)]="newEvent.title">
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill" class="description">
+        <mat-label>Descrição</mat-label>
+        <input matInput id="description" [(ngModel)]="newEvent.description">
+      </mat-form-field>
+  
+      <div class="date-time-container">
+        <mat-form-field appearance="fill" class="date-field">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" id="date" [(ngModel)]="newEvent.date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+  
+        <div class="time-field">
+          <div class="time-picker-wrapper">
+            <igx-time-picker [(ngModel)]="selectedTime" (onSelection)="onTimeSelected($event)"></igx-time-picker>
+          </div>
+        </div>
+      </div>
+  
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="createEvent()">Registrar Evento</button>
+      </div>
+    </mat-card-content>
+  </mat-card>    
+
+  <div *ngIf="events.length === 0">
+    <p>Nenhuma próxima atividade registrada na Agenda</p>
+  </div>
+
+  <div *ngIf="events.length > 0">
+    <mat-card class="event-card" *ngFor="let event of events">
+      <mat-card-title>{{ event.title }}</mat-card-title>
+      <mat-card-subtitle>{{ event.description }}</mat-card-subtitle>
+      <mat-card-content>
+        <p>{{ event.date | date }}</p>
+        <p>{{ event.time }}</p>
+        <button mat-button color="accent" (click)="shareEvent(event.id)">Compartilhar evento</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+  

@@ -1,0 +1,42 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+}
+
+.login-card {
+    width: 75%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 16px;
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.register-text {
+    margin-top: 16px;
+}
+
+h2 {
+    margin-bottom: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

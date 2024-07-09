@@ -1,0 +1,21 @@
+<app-header></app-header>
+
+<div *ngIf="event">
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.description }}</p>
+    <p>{{ event.date | date }}</p>
+    <p>{{ event.time }}</p>
+  
+    <div *ngIf="isOwner">
+      <label>
+        <input type="checkbox" [(ngModel)]="event.isPublic">
+        Público
+      </label>
+      <button (click)="updateEvent()">Salvar Configurações</button>
+    </div>
+</div>
+
+<div *ngIf="!event">
+    <p>Evento privado ou não existente.</p>
+</div>
+  

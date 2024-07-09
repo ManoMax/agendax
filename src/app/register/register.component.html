@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+<div class="register-container">
+    <mat-card class="register-card">
+      <h2>Registrar</h2>
+      <form #registerForm="ngForm" (ngSubmit)="register(credentials)">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="credentials.email" name="email" required>
+        </mat-form-field>
+  
+        <div *ngIf="!emailsMatch && credentials.confirmEmail" class="error-text">
+            Emails não coincidem.
+        </div>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Confirmar Email</mat-label>
+          <input matInput type="email" [(ngModel)]="credentials.confirmEmail" name="confirmEmail" required (blur)="checkEmailMatch()">
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" [(ngModel)]="credentials.password" name="password" required>
+        </mat-form-field>
+  
+        <div *ngIf="!emailsMatch && submitted" class="error-text">
+          Emails não coincidem.
+        </div>
+
+        <button mat-raised-button color="primary" class="full-width" type="submit">Registrar-se</button>
+      </form>
+  
+      <p class="login-text">
+        Já possui uma conta? <a routerLink="/login">Realize o login aqui</a>
+      </p>
+    </mat-card>
+</div>
+  
