@@ -17,12 +17,12 @@ export class AuthService {
   }
 
   login(credentials: any): Promise<any> {
-    // Provisorio
+    // Temporary for tests
     return new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         this.setLoggedIn(true);
         resolve(true);
-      }, 1000);
+      }, 3000);
     });
 
     return this.http.post(`${this.apiUrl}/login`, credentials).toPromise()
