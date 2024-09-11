@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { IgxTimePickerModule } from 'igniteui-angular';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -54,7 +55,8 @@ import { HeaderComponent } from './header/header.component';
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    IgxTimePickerModule
+    IgxTimePickerModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
