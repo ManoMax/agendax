@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:3000/api/events';
+  private apiUrl = 'http://localhost:5000/api/events';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,12 @@ export class EventService {
   }
 
   getEventById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer token',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
   }
 
   createEvent(eventData: any): Observable<any> {

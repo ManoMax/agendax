@@ -7,8 +7,8 @@
     <p>Eventos Passados Finalizados: {{ pastFinishedEventsCount }}</p>
   </div>
   
-  <mat-card>
-    <mat-card-title>Registrar Evento</mat-card-title>
+  <mat-card class="new-event-card">
+    <mat-card-title class="new-event-card-title">Registrar Evento</mat-card-title>
     <mat-card-content>
       <div class="date-text-container">
         <mat-form-field appearance="fill" class="title">
@@ -31,7 +31,7 @@
   
         <div class="time-field">
           <div class="time-picker-wrapper">
-            <igx-time-picker [(ngModel)]="selectedTime" (onSelection)="onTimeSelected($event)"></igx-time-picker>
+            <igx-time-picker [(ngModel)]="newEvent.time"></igx-time-picker>
           </div>
         </div>
       </div>
@@ -46,16 +46,20 @@
     <p>Nenhuma próxima atividade registrada na Agenda</p>
   </div>
 
-  <div *ngIf="events.length > 0">
+  <div *ngIf="events.length > 0" class="event-div">
     <mat-card class="event-card" *ngFor="let event of events">
-      <mat-card-title>{{ event.title }}</mat-card-title>
-      <mat-card-subtitle>{{ event.description }}</mat-card-subtitle>
-      <mat-card-content>
-        <p>{{ event.date | date }}</p>
-        <p>{{ event.time }}</p>
-        <button mat-button color="accent" (click)="shareEvent(event.id)">Compartilhar evento</button>
-      </mat-card-content>
+      <mat-card-title class="event-title">
+        {{ event.title }} 
+        <span class="event-date-time">{{ getFormattedDateTime(event) }}</span>
+      </mat-card-title>
+      <mat-card-subtitle class="event-description">{{ event.description }}</mat-card-subtitle>
+      <mat-card-footer class="event-details">
+        <div class="share-button">
+          <button mat-raised-button color="primary" (click)="shareEvent(event.id)">Compartilhar evento</button>
+        </div>
+      </mat-card-footer>
     </mat-card>
   </div>
+  
 </div>
   
