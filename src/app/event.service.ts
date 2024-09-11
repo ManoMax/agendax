@@ -11,7 +11,7 @@ export class EventService {
   constructor(private http: HttpClient) { }
 
   getEvents(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(`${this.apiUrl}/`);
   }
 
   getEventById(id: string): Observable<any> {
@@ -24,7 +24,12 @@ export class EventService {
   }
 
   createEvent(eventData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, eventData);
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer token',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/`, eventData, { headers });
   }
 
   shareEvent(id: string): Observable<string> {
@@ -33,5 +38,14 @@ export class EventService {
 
   updateEvent(eventData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${eventData.id}`, eventData);
+  }
+
+  deleteEvent(eventId: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer token',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete<any>(`${this.apiUrl}/${eventId}`, { headers });
   }
 }

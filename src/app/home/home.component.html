@@ -54,8 +54,26 @@
       </mat-card-title>
       <mat-card-subtitle class="event-description">{{ event.description }}</mat-card-subtitle>
       <mat-card-footer class="event-details">
-        <div class="share-button">
-          <button mat-raised-button color="primary" (click)="shareEvent(event.id)">Compartilhar evento</button>
+        <mat-slide-toggle
+            color="primary"
+            [checked]="event.checked" 
+            (change)="toggleEventChecked($event, event)"
+            [disabled]="isButtonDisabled">
+          {{ event.checked ? 'Checked' : 'Unchecked' }}
+        </mat-slide-toggle>
+
+        <div class="action-buttons">
+          <button mat-flat-button color="primary" class="icon-button" aria-label="Edit" (click)="editEvent(event.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          
+          <button mat-flat-button color="primary" class="icon-button" aria-label="Delete" (click)="deleteEvent(event.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button mat-flat-button color="primary" class="icon-button" aria-label="Share" (click)="shareEvent(event.id)">
+            <mat-icon>share</mat-icon>
+          </button>
         </div>
       </mat-card-footer>
     </mat-card>

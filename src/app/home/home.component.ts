@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   pastUnfinishedEventsCount;
   pastFinishedEventsCount;
 
+  isButtonDisabled = false;
+
   constructor(private eventService: EventService) {
     this.newEvent = { title: '', description: '', date: new Date(), time: new Date() };
     this.events = [];
@@ -33,11 +35,21 @@ export class HomeComponent implements OnInit {
   }
 
   createEvent(): void {
-    console.log(this.newEvent)
-    this.eventService.createEvent(this.newEvent).subscribe((event: any) => {
-      this.events.push(event);
+    this.eventService.createEvent(this.newEvent).subscribe((response: any) => {
+      this.events = response.events;
       this.updateEventCounts();
       this.newEvent = { title: '', description: '', date: new Date(), time: new Date() };
+    });
+  }
+
+  editEvent(eventId: string): void {
+    console.log('Edit...')
+  }
+
+  deleteEvent(eventId: string): void {
+    this.eventService.deleteEvent(eventId).subscribe((response: any) => {
+      this.events = response.events;
+      this.updateEventCounts();
     });
   }
 
@@ -46,6 +58,20 @@ export class HomeComponent implements OnInit {
       navigator.clipboard.writeText(link);
       alert('Link copiado para a área de transferência!');
     });
+  }
+
+  toggleEventChecked(event: any, targetEvent: any) {
+    this.isButtonDisabled = true;
+    targetEvent.checked = event.checked;
+    console.log(`${targetEvent.title} is now ${targetEvent.checked ? 'Checked' : 'Unchecked'}`);
+
+    setTimeout(() => {
+      this.isButtonDisabled = false;
+    }, 3000);
+  }
+
+  onToggleChange(event: any, targetEvent: any) {
+    this.toggleEventChecked(event, targetEvent);
   }
 
   updateEventCounts(): void {
